@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ pet.name }}</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e9ecef;
+        }
+
+        .header {
+            background-color: #007bff;
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+            font-size: 1.5em;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            width: 90%;
+            margin: 20px auto;
+            max-width: 1000px;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .pet-photo {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .pet-photo:hover {
+            transform: scale(1.05);
+        }
+
+        h2 {
+            font-size: 2.5em;
+            color: #343a40;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        p {
+            font-size: 1.1em;
+            color: #495057;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1em;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                font-size: 1.2em;
+            }
+
+            .container {
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 2em;
+            }
+
+            p {
+                font-size: 1em;
+            }
+
+            .back-button {
+                padding: 8px 16px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        Pet Adoption Center
+    </div>
+    <div class="container">
+        <h2>{{ pet.name }}</h2>
+        {% if pet.photo %}
+            <img src="{{ pet.photo.url }}" alt="Photo of {{ pet.name }}" class="pet-photo">
+        {% else %}
+            <p>No photo available</p>
+        {% endif %}
+        <p>{{ pet.description|default:"No description available" }}</p>
+        <a href="{% url 'adoption:index' %}" class="back-button">Back to List</a>
+    </div>
+</body>
+</html>
